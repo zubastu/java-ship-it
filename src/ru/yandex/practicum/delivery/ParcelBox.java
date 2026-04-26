@@ -21,7 +21,7 @@ public class ParcelBox<T extends Parcel> {
     public void addParcel(T parcel) {
         if (parcel != null
                 && currentWeight < maxWeight
-                && (currentWeight + parcel.getWeight() < maxWeight)
+                && (currentWeight + parcel.getWeight() <= maxWeight)
         ) {
             parcels.add(parcel);
             currentWeight += parcel.getWeight();

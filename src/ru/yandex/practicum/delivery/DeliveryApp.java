@@ -15,11 +15,6 @@ public class DeliveryApp {
 
     public static void main(String[] args) {
         boolean running = true;
-        StandardParcel standardParcel1 = new StandardParcel("standard", 10, "Moscow", 20);
-        FragileParcel fragileParcel1 = new FragileParcel("Fragile", 4, "Novosibirsk", 1);
-        PerishableParcel perishableParcel1 = new PerishableParcel("Perishable", 14, "St. Petersburg", 10, 2);
-
-
         while (running) {
             showMenu();
             int choice = Integer.parseInt(scanner.nextLine());
@@ -55,7 +50,6 @@ public class DeliveryApp {
         System.out.println("0 — Завершить");
     }
 
-    // реализуйте методы ниже
 
     private static void addParcel() {
         System.out.println("Выберите тип посылки:");

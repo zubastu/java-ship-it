@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DeliveryApp {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static List<Parcel> allParcels = new ArrayList<>();
     private static List<Trackable> trackableParcels = new ArrayList<>();

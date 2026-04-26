@@ -22,7 +22,9 @@ public abstract class Parcel {
     public void deliver() {
         System.out.println("Посылка " + getDescription() + " доставлена по адресу" + getDeliveryAddress() + ".");
     };
-    public void calculateDeliveryCost() {};
+    public int calculateDeliveryCost() {
+        return weight * calculateCoefficient;
+    };
 
     public String getDescription() {
         return description;

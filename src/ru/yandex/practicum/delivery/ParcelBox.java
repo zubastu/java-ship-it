@@ -8,8 +8,8 @@ public class ParcelBox<T extends Parcel> {
     private ArrayList<T> parcels;
 
 
-    public ParcelBox(ArrayList<T> parcels, int maxWeight) {
-        this.parcels = parcels;
+    public ParcelBox(int maxWeight) {
+        this.parcels = new ArrayList<>();
         this.maxWeight = maxWeight;
         this.currentWeight = 0;
     }
@@ -19,14 +19,21 @@ public class ParcelBox<T extends Parcel> {
     }
 
     public void addParcel(T parcel) {
-        if (parcel != null
-                && currentWeight < maxWeight
-                && (currentWeight + parcel.getWeight() <= maxWeight)
-        ) {
+        if (parcel != null && (currentWeight + parcel.getWeight() <= maxWeight)) {
             parcels.add(parcel);
             currentWeight += parcel.getWeight();
         } else {
             System.out.println("Посылку нельзя добавить.");
+        }
+    }
+
+    public void printParcelBox() {
+        if (parcels.isEmpty()) {
+            System.out.println("\n Посылок нет.");
+        } else {
+            for (T parcel : parcels) {
+                System.out.println(parcel.getDescription());
+            }
         }
     }
 }

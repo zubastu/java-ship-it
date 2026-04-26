@@ -8,6 +8,7 @@ public class DeliveryApp {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static List<Parcel> allParcels = new ArrayList<>();
+    private static List<Trackable> trackableParcels = new ArrayList<>();
 
     public static void main(String[] args) {
         boolean running = true;
@@ -30,6 +31,9 @@ public class DeliveryApp {
                 case 3:
                     calculateCosts();
                     break;
+                case 4:
+                    printAllTrackable();
+                    break;
                 case 0:
                     running = false;
                     break;
@@ -44,14 +48,13 @@ public class DeliveryApp {
         System.out.println("1 — Добавить посылку");
         System.out.println("2 — Отправить все посылки");
         System.out.println("3 — Посчитать стоимость доставки");
+        System.out.println("4 - Отправления поддерживающие трекинг.");
         System.out.println("0 — Завершить");
     }
 
     // реализуйте методы ниже
 
     private static void addParcel() {
-        // Подсказка: спросите тип посылки и необходимые поля, создайте объект и добавьте в allParcels
-
         System.out.println("Выберите тип посылки:");
         System.out.println("1 - Стандартная.");
         System.out.println("2 - Скоропортящаяся.");
@@ -59,43 +62,40 @@ public class DeliveryApp {
         int choice = Integer.parseInt(scanner.nextLine());
 
         switch (choice) {
-            case 1: {
+            case 1 -> {
                 System.out.println("Выбран тип посылки - Стандарт.");
                 String name = askParcelDescription();
                 int weight = askParcelWeight();
                 String address = askParcelDeliveryAddress();
                 int sendDay = askParcelSendDay();
                 StandardParcel standardParcel = new StandardParcel(name, weight, address, sendDay);
-
+                allParcels.add(standardParcel);
                 System.out.println("Посылка собрана.");
-                break;
             }
-            case 2: {
+            case 2 -> {
                 System.out.println("Выбран тип посылки - Скоропортящаяся.");
                 String name = askParcelDescription();
                 int weight = askParcelWeight();
                 String address = askParcelDeliveryAddress();
                 int sendDay = askParcelSendDay();
                 int timeToLive = askParcelTimeToLive();
-                PerishableParcel perishableParcel = new PerishableParcel(name, weight,address,sendDay,timeToLive);
-
+                PerishableParcel perishableParcel = new PerishableParcel(name, weight, address, sendDay, timeToLive);
+                allParcels.add(perishableParcel);
                 System.out.println("Посылка собрана.");
-                break;
             }
-            case 3: {
+            case 3 -> {
                 System.out.println("Выбран тип посылки - Хрупкая.");
                 String name = askParcelDescription();
                 int weight = askParcelWeight();
                 String address = askParcelDeliveryAddress();
                 int sendDay = askParcelSendDay();
-                FragileParcel fragileParcel = new FragileParcel(name, weight,address,sendDay);
-
+                FragileParcel fragileParcel = new FragileParcel(name, weight, address, sendDay);
+                allParcels.add(fragileParcel);
+                trackableParcels.add(fragileParcel);
                 System.out.println("Посылка собрана.");
-                break;
             }
-            default: {
+            default -> {
                 System.out.println("Введён некорректный тип посылки.");
-                break;
             }
         }
 
@@ -138,6 +138,19 @@ public class DeliveryApp {
         System.out.println("Введите срок годности посылки(в днях):");
         int choice = Integer.parseInt(scanner.nextLine());
         return choice;
+    }
+
+    private static String askParcelNewLocation() {
+        System.out.println("Введите новое местоположение:");
+        String choice = scanner.nextLine();
+        return choice;
+    }
+
+    private static void printAllTrackable() {
+        String newLocation = askParcelNewLocation();
+        for (Trackable parcel : trackableParcels) {
+            parcel.reportStatus(newLocation);
+        }
     }
 
 

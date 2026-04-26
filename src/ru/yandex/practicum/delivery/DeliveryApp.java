@@ -11,6 +11,11 @@ public class DeliveryApp {
 
     public static void main(String[] args) {
         boolean running = true;
+        StandardParcel standardParcel1 = new StandardParcel("standard", 10, "Moscow", 20);
+        FragileParcel fragileParcel1 = new FragileParcel("Fragile", 4, "Novosibirsk", 1);
+        PerishableParcel perishableParcel1 = new PerishableParcel("Perishable", 14, "St. Petersburg", 10, 2);
+        //System.out.println(perishableParcel1.isExpired(13));
+
         while (running) {
             showMenu();
             int choice = Integer.parseInt(scanner.nextLine());
@@ -46,6 +51,55 @@ public class DeliveryApp {
 
     private static void addParcel() {
         // Подсказка: спросите тип посылки и необходимые поля, создайте объект и добавьте в allParcels
+
+        System.out.println("Выберите тип посылки:");
+        System.out.println("1 - Стандартная.");
+        System.out.println("2 - Скоропортящаяся.");
+        System.out.println("3 - Хрупкая.");
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        switch (choice) {
+            case 1: {
+                System.out.println("Выбран тип посылки - Стандарт.");
+                String name = askParcelDescription();
+                int weight = askParcelWeight();
+                String address = askParcelDeliveryAddress();
+                int sendDay = askParcelSendDay();
+                StandardParcel standardParcel = new StandardParcel(name, weight, address, sendDay);
+
+                System.out.println("Посылка собрана.");
+                break;
+            }
+            case 2: {
+                System.out.println("Выбран тип посылки - Скоропортящаяся.");
+                String name = askParcelDescription();
+                int weight = askParcelWeight();
+                String address = askParcelDeliveryAddress();
+                int sendDay = askParcelSendDay();
+                int timeToLive = askParcelTimeToLive();
+                PerishableParcel perishableParcel = new PerishableParcel(name, weight,address,sendDay,timeToLive);
+
+                System.out.println("Посылка собрана.");
+                break;
+            }
+            case 3: {
+                System.out.println("Выбран тип посылки - Хрупкая.");
+                String name = askParcelDescription();
+                int weight = askParcelWeight();
+                String address = askParcelDeliveryAddress();
+                int sendDay = askParcelSendDay();
+                FragileParcel fragileParcel = new FragileParcel(name, weight,address,sendDay);
+
+                System.out.println("Посылка собрана.");
+                break;
+            }
+            default: {
+                System.out.println("Введён некорректный тип посылки.");
+                break;
+            }
+        }
+
+
     }
 
     private static void sendParcels() {
@@ -55,6 +109,37 @@ public class DeliveryApp {
     private static void calculateCosts() {
         // Посчитать общую стоимость всех доставок и вывести на экран
     }
+
+    private static String askParcelDescription() {
+        System.out.println("Введите описание посылки:");
+        String choice = scanner.nextLine();
+        return choice;
+    }
+
+    private static int askParcelWeight() {
+        System.out.println("Введите вес посылки:");
+        int choice = Integer.parseInt(scanner.nextLine());
+        return choice;
+    }
+
+    private static String askParcelDeliveryAddress() {
+        System.out.println("Введите адрес доставки:");
+        String choice = scanner.nextLine();
+        return choice;
+    }
+
+    private static int askParcelSendDay() {
+        System.out.println("Введите день отправки:");
+        int choice = Integer.parseInt(scanner.nextLine());
+        return choice;
+    }
+
+    private static int askParcelTimeToLive() {
+        System.out.println("Введите срок годности посылки(в днях):");
+        int choice = Integer.parseInt(scanner.nextLine());
+        return choice;
+    }
+
 
 }
 

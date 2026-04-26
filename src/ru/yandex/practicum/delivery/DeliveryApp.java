@@ -9,13 +9,16 @@ public class DeliveryApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static List<Parcel> allParcels = new ArrayList<>();
     private static List<Trackable> trackableParcels = new ArrayList<>();
+    private static ParcelBox<StandardParcel> standardParcelBox = new ParcelBox<>(new ArrayList<StandardParcel>(), 60);
+    private static ParcelBox<PerishableParcel> perishParcelBox = new ParcelBox<>(new ArrayList<PerishableParcel>(), 60);
+    private static ParcelBox<FragileParcel> fragileParcelBox = new ParcelBox<>(new ArrayList<FragileParcel>(), 60);
 
     public static void main(String[] args) {
         boolean running = true;
         StandardParcel standardParcel1 = new StandardParcel("standard", 10, "Moscow", 20);
         FragileParcel fragileParcel1 = new FragileParcel("Fragile", 4, "Novosibirsk", 1);
         PerishableParcel perishableParcel1 = new PerishableParcel("Perishable", 14, "St. Petersburg", 10, 2);
-        //System.out.println(perishableParcel1.isExpired(13));
+
 
         while (running) {
             showMenu();

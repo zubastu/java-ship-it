@@ -15,19 +15,22 @@ public abstract class Parcel {
         this.calculateCoefficient = 2;
     }
 
+    protected abstract int getCalculateCoefficient();
 
     public void packageItem() {
         System.out.println("Посылка '" + getDescription() + "' упакована");
     }
+
     public void deliver() {
         System.out.println("Посылка " + getDescription() + " доставлена по адресу" + getDeliveryAddress() + ".");
-    };
+    }
+
     public int calculateDeliveryCost() {
         if (weight < 1) {
-            return calculateCoefficient;
+            return getCalculateCoefficient();
         }
-        return weight * calculateCoefficient;
-    };
+        return weight * getCalculateCoefficient();
+    }
 
     public String getDescription() {
         return description;

@@ -17,7 +17,7 @@ public class DeliveryCostTest {
     @Test
     public void shouldCalculateStandardParcelCostWithZeroWeight() {
         StandardParcel standardParcelTest = new StandardParcel("стандарт", 0, "Москва", 20);
-        assertEquals(2, standardParcelTest.calculateDeliveryCost(), "Расчет для стандартной посылки неправильный.");
+        assertEquals(0, standardParcelTest.calculateDeliveryCost(), "Расчет для стандартной посылки неправильный.");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class DeliveryCostTest {
     @Test
     public void shouldCalculatePerishParcelCostWithZeroWeight() {
         PerishableParcel perishableParcelTest = new PerishableParcel("скоропортящаяся", 0, "Питер", 10, 2);
-        assertEquals(3, perishableParcelTest.calculateDeliveryCost(), "Расчет для скоропортящейся посылки неправильный.");
+        assertEquals(0, perishableParcelTest.calculateDeliveryCost(), "Расчет для скоропортящейся посылки неправильный.");
     }
 
 
@@ -42,6 +42,6 @@ public class DeliveryCostTest {
     @Test
     public void shouldCalculateFragileParcelCostWithZeroWeight() {
         FragileParcel fragileParcelTest = new FragileParcel("хрупкая", 0, "Новосибирск", 1);
-        assertEquals(4, fragileParcelTest.calculateDeliveryCost(), "Расчет для хрупкой посылки неправильный.");
+        assertEquals(0, fragileParcelTest.calculateDeliveryCost(), "Расчет для хрупкой посылки неправильный.");
     }
 }

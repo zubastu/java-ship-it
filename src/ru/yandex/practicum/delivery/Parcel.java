@@ -26,9 +26,6 @@ public abstract class Parcel {
     }
 
     public int calculateDeliveryCost() {
-        if (weight < 1) {
-            return getCalculateCoefficient();
-        }
         return weight * getCalculateCoefficient();
     }
 
